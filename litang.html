@@ -1,21 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Back To Litang</title>
+    <script src='js/runner.js'></script>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back to Litang</title>
-</head>
-
-<body onload = 'initialize();'>
-    <div id="bodybackground">
-        <div class="container">            
-
-            <div class="gamezone">
-                <canvas id="canvas" width='500' height='200'>
-				</canvas>   
-            </div>
-        </div>
-    </div>
-</body>
-
+  <body onload='init();'>
+    <style>
+        #myCanvas {
+            margin-top: 150px;
+        }
+    </style>
+    <canvas id='myCanvas' width='1600' height='500' style='border:2px solid #000000;'></canvas>
+  </body>
 </html>
