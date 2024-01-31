@@ -54,4 +54,12 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
+
+var p_sound= document.getElementById('zsxb');
+document.body.onkeydown = function(e){
+    if(e.keyCode == 80){
+        p_sound.play();
+    }
+}
+
 gameLoop();
