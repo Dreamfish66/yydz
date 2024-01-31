@@ -10,7 +10,7 @@ var groundHeight = 350;
 var speed_ground = 2;
 
 const bgImage = new Image();
-bgImage.src = 'background.jpg';
+bgImage.src = 'images/background.jpg';
 
 
 const bg = {

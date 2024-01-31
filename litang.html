@@ -14,6 +14,15 @@
 canvas {
     display: block;
 }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rotate-image {
+  animation: spin 4s linear infinite;
+}
+
 </style>
 <body style="background-color: #2c5b7e;">
     <div id="canvasContainer" style="position: relative;">
@@ -21,7 +30,12 @@ canvas {
         <canvas id="character" width="1600" height="500" style="position: absolute; left: 0; top: 0;"></canvas>
         <canvas id="object" width="1600" height="500" style="position: absolute; left: 0; top: 0;"></canvas>
     </div>
-    <p style="font-weight: bold; color: rgb(54, 0, 163); font-size: 64px; position: absolute; right: 200px; bottom: 300px">纯真の游戏</p>
+    <p style="font-weight: bold; color: rgb(54, 0, 163); font-size: 64px; position: absolute; right: 200px; bottom: 300px">Back to Litang</p>
+    <p style="color: rgb(119, 117, 123); font-size: 32px; position: absolute; left: 1000px; bottom: 250px">press SPACE to jump</p>
+    <p style="color: rgb(119, 117, 123); font-size: 32px; position: absolute; left: 1000px; bottom: 200px">press S to crouch</p>
+    <img src="images/dyy_stand.png" width="200" height="350" style="position:absolute; left: 200px ;top: 550px;" class="rotate-image" alt="rotating_image"/>
+
+
     <script src="js/main.js"></script>
     
 </body>
