@@ -1,7 +1,6 @@
-
 var canvas = document.getElementById('background');
 var ctx = canvas.getContext('2d');
-
+var gamecontinue;
 canvas.width = 1600;
 canvas.height = 500;
 
@@ -20,6 +19,149 @@ const bg = {
     width: 6400, 
     height: 500, 
     speed: 2 
+}
+
+var runner = 0;
+var run_h = 300;
+var FPS = 40;
+var dzyy_stand = new Image();
+dzyy_stand.src = "images/dyy_stand.png"
+var dzyy_zip = new Image();
+dzyy_zip.src = "images/dyy_zip.png"
+var xuebaopic = new Image();
+xuebaopic.src = "images/xuebao.jpg"
+var yingpic = new Image();
+yingpic.src = "images/ying.jpg"
+
+
+function init(){
+    initcondition();
+    document.addEventListener('keydown',function(tecla){     
+        if(tecla.code == 'Space' && runner == 0){
+            runner = 1;
+        }
+    
+        if(tecla.code == 'KeyS' && runner == 0){
+            runner = -1;
+        }
+    });
+    document.addEventListener('keyup',function(event){     
+        if(event.code == 'KeyS' && runner == -1){
+            runner = 0;
+        }
+    });
+
+    setInterval(function(){
+      gameLoop();
+    },1000/FPS);
+}
+function initcondition(){
+    generateanimal();
+    runner = 0;
+    gamecontinue = 0;
+}
+var an_x = [];
+var an_y = [];
+var an_value = [];
+var an_speed = [];
+var xuebao = 1;
+var ying = 2;
+
+function generateanimal() { // generate 500 animals;
+  for (var i = 0; i < 500; i++) {
+          var tmp_type = Math.random();
+          var tmp_posX = Math.random();
+          var tmp_posY = Math.random();
+          var type = 0;
+          if (tmp_type > 0.7) {
+            an_value.push(ying); 
+            type = ying;
+          }// Depending on the value of tmp, we generate
+          else {
+            an_value.push(xuebao);
+            type = xuebao;
+          }
+          switch (type){
+            case 1:
+              an_speed.push(10);
+              an_y.push(0);
+              break;
+            case 2:
+              an_speed.push(15);
+              an_y.push(100+tmp_posY*350);
+              break;
+          }
+          an_x.push(1600+((i * 500) + (tmp_posX * 200))); // Generate negative height values. Then, only the ones inside the canvas will be represented.
+      }
+}
+
+
+function run(){
+  if (runner>0 && runner <= 30){
+    ctx.drawImage(dzyy_stand, 300, 300 - 5*runner, 120, 200);
+    run_h=300 - 5*runner;
+  }
+  else if (runner > 0 && runner > 30){
+    ctx.drawImage(dzyy_stand, 300, 5*runner, 120, 200);
+    run_h=5*runner;
+  }
+  else if (runner == -1)
+    ctx.drawImage(dzyy_zip, 300, 400, 120, 100);
+  else if (runner == 0)
+    ctx.drawImage(dzyy_stand, 300, 300, 120, 200);
+  if (runner>0)
+    runner=runner+1;
+  if (runner == 60)
+    runner = 0;
+}
+function animalsmove(){
+    for (var i=0; i<500; i++){
+        an_x[i]=an_x[i]-an_speed[i];
+    }
+}
+function drawanimals(){
+    for (var i=0; i<500; i++){
+        if (an_x[i]>0 && an_x[i]<1650){
+            switch (an_value[i]){
+                case 1:
+                  ctx.drawImage(xuebaopic, an_x[i], 400-an_y[i], 200, 100);
+                  break;
+                case 2:
+                  ctx.drawImage(yingpic, an_x[i], 450-an_y[i], 150, 50);
+                  break;
+
+            }
+        }
+    }
+}
+function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
+    if (a1<=b1 && a2>=b1 && a3<=b3 && a4>=b3)
+    gamecontinue=1;
+    if (a1<=b2 && a2>=b2 && a3<=b4 && a4>=b4)
+    gamecontinue=1;
+    if (a1<=b2 && a2>=b1 && a3<=b4 && a4>=b4)
+    gamecontinue=1;
+    if (a1<=b1 && a2>=b2 && a3<=b3 && a4>=b3)
+    gamecontinue=1;
+}
+function checkanimals(){
+    var heighty=0;
+    if (runner == -1)
+        heighty=run_h+100;
+    else heighty=run_h+200;
+    for (var i=0; i<500; i++){
+        if (an_x[i]>0 && an_x[i]<1650){
+            switch (an_value[i]){
+                case 1:
+                  checkcollision(300,420,run_h,heighty,an_x[i],an_x[i]+200,400,500)
+                  break;
+                case 2:
+                    checkcollision(300,420,run_h,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
+                  break;
+
+            }
+        }
+    }
 }
 function updateBackground() {
     bg.x1 -= bg.speed;
@@ -47,11 +189,14 @@ var groundLine = {
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+  if (gamecontinue == 0){
   updateBackground();
   drawBackground();
-
-  requestAnimationFrame(gameLoop);
+  run();
+  animalsmove();
+  drawanimals();
+  checkanimals();
+  }
 }
 
 
@@ -62,4 +207,4 @@ document.body.onkeydown = function(e){
     }
 }
 
-gameLoop();
+init();
