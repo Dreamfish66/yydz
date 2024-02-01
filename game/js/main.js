@@ -173,7 +173,7 @@ function checkanimals(){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
-                  checkcollision(300,370,run_h+10,heighty,an_x[i],an_x[i]+100,450,500)
+                  checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+100,450,500)
                   break;
                 case 2:
                     checkcollision(300,420,run_h+10,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
