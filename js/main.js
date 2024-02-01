@@ -105,10 +105,12 @@ function run(){
     ctx.drawImage(dzyy_stand, 300, 5*runner, 120, 200);
     run_h=5*runner;
   }
-  else if (runner == -1)
+  else if (runner == -1){
     ctx.drawImage(dzyy_zip, 300, 400, 120, 100);
-  else if (runner == 0)
+    run_h=400;}
+  else if (runner == 0){
     ctx.drawImage(dzyy_stand, 300, 300, 120, 200);
+    run_h=300;}
   if (runner>0)
     runner=runner+1;
   if (runner == 60)
