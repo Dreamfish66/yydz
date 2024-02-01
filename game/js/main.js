@@ -217,14 +217,13 @@ function gameLoop() {
   animalsmove();
   drawanimals();
   checkanimals();
-  console.log(ruike);
   count_ani();
   }
 }
 
 function count_ani(){
   for(i=0;i<500;i++){
-    if(an_x[i]<0){
+    if(an_x[i]<300){
       count=i+1;
     }
   }
@@ -234,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   setInterval(function() {
       displayElement.innerHTML = "You have met " + count + " animal friends."; 
-  }, 10); 
+  }, 1000/FPS); 
 });
 
 
