@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   setInterval(function() {
       displayElement.innerHTML = "You have met " + count + " animal friends."; 
-  }, 100); 
+  }, 10); 
 });
 
 

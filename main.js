@@ -26,7 +26,7 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
 // Background
-const spaceTexture = new THREE.TextureLoader().load('images/desert.jpg');
+const spaceTexture = new THREE.TextureLoader().load('game/images/b.jpg');
 scene.background = spaceTexture;
 
 // Objects
@@ -47,7 +47,7 @@ scene.background = spaceTexture;
 // Add multiple keys
 function addKeys() {
     const geometry = new THREE.CircleGeometry(0.7, 32);
-    const material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('images/key.png') });
+    const material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('game/images/w.png') });
     const circle = new THREE.Mesh(geometry, material);
 
     const [x, y, z] = Array(3)
