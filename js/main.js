@@ -95,15 +95,18 @@ function generateanimal() { // generate 500 animals;
       }
 }
 
-
+function jump_path(x){
+  x = 2*x;
+  return (1/6)*(x-30)*(x-30)+150;
+}
 function run(){
-  if (runner>0 && runner <= 30){
-    ctx.drawImage(dzyy_stand, 300, 300 - 5*runner, 120, 200);
-    run_h=300 - 5*runner;
+  if (runner>0 && runner <= 15){
+    ctx.drawImage(dzyy_stand, 300, jump_path(runner), 120, 200);
+    run_h=jump_path(runner);
   }
-  else if (runner > 0 && runner > 30){
-    ctx.drawImage(dzyy_stand, 300, 5*runner, 120, 200);
-    run_h=5*runner;
+  else if (runner > 0 && runner > 15){
+    ctx.drawImage(dzyy_stand, 300, jump_path(runner), 120, 200);
+    run_h=jump_path(runner);
   }
   else if (runner == -1)
     ctx.drawImage(dzyy_zip, 300, 400, 120, 100);
@@ -111,7 +114,7 @@ function run(){
     ctx.drawImage(dzyy_stand, 300, 300, 120, 200);
   if (runner>0)
     runner=runner+1;
-  if (runner == 60)
+  if (runner == 30)
     runner = 0;
 }
 function animalsmove(){
@@ -124,7 +127,7 @@ function drawanimals(){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
-                  ctx.drawImage(xuebaopic, an_x[i], 400-an_y[i], 200, 100);
+                  ctx.drawImage(xuebaopic, an_x[i], 450-an_y[i], 100, 50);
                   break;
                 case 2:
                   ctx.drawImage(yingpic, an_x[i], 450-an_y[i], 150, 50);
@@ -153,7 +156,7 @@ function checkanimals(){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
-                  checkcollision(300,420,run_h,heighty,an_x[i],an_x[i]+200,400,500)
+                  checkcollision(300,420,run_h,heighty,an_x[i],an_x[i]+100,450,500)
                   break;
                 case 2:
                     checkcollision(300,420,run_h,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
