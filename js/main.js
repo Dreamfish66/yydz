@@ -29,9 +29,9 @@ dzyy_stand.src = "images/dyy_stand.png"
 var dzyy_zip = new Image();
 dzyy_zip.src = "images/dyy_zip.png"
 var xuebaopic = new Image();
-xuebaopic.src = "images/xuebao.jpg"
+xuebaopic.src = "images/xuebao.png"
 var yingpic = new Image();
-yingpic.src = "images/ying.jpg"
+yingpic.src = "images/ying.png"
 var winwinpic = new Image();
 winwinpic.src="images/winwin.png"
 
@@ -40,10 +40,12 @@ function init(){
     initcondition();
     document.addEventListener('keydown',function(tecla){     
         if(tecla.code == 'Space' && runner <= 0){
+            yi_sound.play();
             runner = 1;
         }
     
         if(tecla.code == 'KeyS' && runner == 0){
+          wu_sound.play();
             runner = -1;
         }
     });
@@ -135,10 +137,10 @@ function drawanimals(){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
-                  ctx.drawImage(xuebaopic, an_x[i], 450-an_y[i], 100, 50);
+                  ctx.drawImage(xuebaopic, an_x[i], 435-an_y[i], 150, 75);
                   break;
                 case 2:
-                  ctx.drawImage(yingpic, an_x[i], 450-an_y[i], 150, 50);
+                  ctx.drawImage(yingpic, an_x[i], 450-an_y[i], 180, 80);
                   break;
 
             }
@@ -216,11 +218,16 @@ function gameLoop() {
 
 
 var p_sound= document.getElementById('zsxb');
+var yi_sound= document.getElementById('yi');
+var wu_sound= document.getElementById('wu');
+window.onload = function() {
 document.body.onkeydown = function(e){
-    if(e.keyCode == 80){
-        p_sound.play();
-    }
+  if(e.key === 'p' || e.key === 'P'){
+      p_sound.play();
+  }
 }
+};
+
 
 
 
