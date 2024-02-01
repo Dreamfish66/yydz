@@ -88,7 +88,7 @@ function generateanimal() { // generate 500 animals;
               break;
             case 2:
               an_speed.push(15);
-              an_y.push(100+tmp_posY*350);
+              an_y.push(150+tmp_posY*350);
               break;
           }
           an_x.push(1600+((i * 500) + (tmp_posX * 200))); // Generate negative height values. Then, only the ones inside the canvas will be represented.
@@ -108,10 +108,12 @@ function run(){
     ctx.drawImage(dzyy_stand, 300, jump_path(runner), 120, 200);
     run_h=jump_path(runner);
   }
-  else if (runner == -1)
+  else if (runner == -1){
     ctx.drawImage(dzyy_zip, 300, 400, 120, 100);
-  else if (runner == 0)
+    run_h=400;}
+  else if (runner == 0){
     ctx.drawImage(dzyy_stand, 300, 300, 120, 200);
+    run_h=300;}
   if (runner>0)
     runner=runner+1;
   if (runner == 30)
@@ -142,9 +144,9 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
     gamecontinue=1;
     if (a1<=b2 && a2>=b2 && a3<=b4 && a4>=b4)
     gamecontinue=1;
-    if (a1<=b2 && a2>=b1 && a3<=b4 && a4>=b4)
+    if (a1<=b1 && a2>=b2 && a3<=b4 && a4>=b4)
     gamecontinue=1;
-    if (a1<=b1 && a2>=b2 && a3<=b3 && a4>=b3)
+    if (a1<=b2 && a2>=b2 && a3<=b3 && a4>=b3)
     gamecontinue=1;
 }
 function checkanimals(){
