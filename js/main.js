@@ -97,22 +97,22 @@ function generateanimal() { // generate 500 animals;
 
 function jump_path(x){
   x = 2*x;
-  return (1/6)*(x-30)*(x-30)+150;
+  return (1/6)*(x-30)*(x-30)+200;
 }
 function run(){
   if (runner>0 && runner <= 15){
-    ctx.drawImage(dzyy_stand, 300, jump_path(runner), 120, 200);
+    ctx.drawImage(dzyy_stand, 300, jump_path(runner), 90, 150);
     run_h=jump_path(runner);
   }
   else if (runner > 0 && runner > 15){
-    ctx.drawImage(dzyy_stand, 300, jump_path(runner), 120, 200);
+    ctx.drawImage(dzyy_stand, 300, jump_path(runner), 90, 150);
     run_h=jump_path(runner);
   }
   else if (runner == -1){
-    ctx.drawImage(dzyy_zip, 300, 400, 120, 100);
+    ctx.drawImage(dzyy_zip, 300, 425, 90, 75);
     run_h=400;}
   else if (runner == 0){
-    ctx.drawImage(dzyy_stand, 300, 300, 120, 200);
+    ctx.drawImage(dzyy_stand, 300, 350, 90, 150);
     run_h=300;}
   if (runner>0)
     runner=runner+1;
@@ -152,8 +152,8 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
 function checkanimals(){
     var heighty=0;
     if (runner == -1)
-        heighty=run_h+100;
-    else heighty=run_h+200;
+        heighty=run_h+75;
+    else heighty=run_h+150;
     for (var i=0; i<500; i++){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
@@ -211,5 +211,7 @@ document.body.onkeydown = function(e){
         p_sound.play();
     }
 }
+
+
 
 init();
