@@ -3,6 +3,8 @@ var ctx = canvas.getContext('2d');
 var gamecontinue;
 canvas.width = 1600;
 canvas.height = 500;
+var canvasr = document.getElementById('object');
+var ctxr = canvasr.getContext('2d');
 
 var groundHeight = 350;
 
@@ -240,6 +242,8 @@ function initruike(){
 function updateruike(){
   if (ruike>0)
     ruike=ruike-1;
+  if (ruike == 0)
+    ctxr.drawImage(winwinpic, 40, 40, 200, 200);
 }
 
 var audio = document.getElementById("bgm");
