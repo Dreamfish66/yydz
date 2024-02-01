@@ -38,6 +38,8 @@ var winwinpic = new Image();
 winwinpic.src="images/winwin.png"
 var ruikepic = new Image();
 ruikepic.src = "images/ruike.png"
+var tuboshupic = new Image();
+tuboshupic.src = "images/tuboshu.png"
 
 function init(){
     initcondition();
@@ -75,6 +77,7 @@ var an_value = [];
 var an_speed = [];
 var xuebao = 1;
 var ying = 2;
+var tuboshu = 3;
 
 function generateanimal() { // generate 500 animals;
   for (var i = 0; i < 500; i++) {
@@ -82,11 +85,15 @@ function generateanimal() { // generate 500 animals;
           var tmp_posX = Math.random();
           var tmp_posY = Math.random();
           var type = 0;
-          if (tmp_type > 0.7) {
+          if (tmp_type >= 0.8) {
             an_value.push(ying); 
             type = ying;
           }// Depending on the value of tmp, we generate
-          else {
+          else if (tmp_type <= 0.2) {
+            an_value.push(tuboshu); 
+            type = tuboshu;
+          }
+          else{
             an_value.push(xuebao);
             type = xuebao;
           }
@@ -98,6 +105,10 @@ function generateanimal() { // generate 500 animals;
             case 2:
               an_speed.push(15);
               an_y.push(150+tmp_posY*350);
+              break;
+            case 3:
+              an_speed.push(8);
+              an_y.push(0);
               break;
           }
           an_x.push(1600+((i * 500) + (tmp_posX * 200))); // Generate negative height values. Then, only the ones inside the canvas will be represented.
@@ -144,7 +155,10 @@ function drawanimals(){
                   ctx.drawImage(xuebaopic, an_x[i], 435-an_y[i], 150, 75);
                   break;
                 case 2:
-                  ctx.drawImage(yingpic, an_x[i], 450-an_y[i], 180, 80);
+                  ctx.drawImage(yingpic, an_x[i], 420-an_y[i], 180, 80);
+                  break;
+                case 3:
+                  ctx.drawImage(tuboshupic, an_x[i], 390-an_y[i], 50, 110);
                   break;
 
             }
@@ -176,7 +190,10 @@ function checkanimals(){
                   checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+100,450,500)
                   break;
                 case 2:
-                    checkcollision(300,420,run_h+10,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
+                    checkcollision(300,370,run_h+10,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
+                  break;
+                case 3:
+                  checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+50,390,500)
                   break;
 
             }
