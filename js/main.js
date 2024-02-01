@@ -139,9 +139,9 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
     gamecontinue=1;
     if (a1<=b2 && a2>=b2 && a3<=b4 && a4>=b4)
     gamecontinue=1;
-    if (a1<=b2 && a2>=b1 && a3<=b4 && a4>=b4)
+    if (a1<=b1 && a2>=b2 && a3<=b4 && a4>=b4)
     gamecontinue=1;
-    if (a1<=b1 && a2>=b2 && a3<=b3 && a4>=b3)
+    if (a1<=b2 && a2>=b2 && a3<=b3 && a4>=b3)
     gamecontinue=1;
 }
 function checkanimals(){
