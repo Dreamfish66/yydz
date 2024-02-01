@@ -57,6 +57,7 @@ function init(){
 }
 function initcondition(){
     generateanimal();
+    initruike();
     runner = 0;
     gamecontinue = 0;
 }
@@ -148,6 +149,9 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
     gamecontinue=1;
     if (a1<=b2 && a2>=b2 && a3<=b3 && a4>=b3)
     gamecontinue=1;
+    if (ruike>=320 && ruike<=400){
+    gamecontinue=0;
+    }
 }
 function checkanimals(){
     var heighty=0;
@@ -198,6 +202,7 @@ function gameLoop() {
   updateBackground();
   drawBackground();
   run();
+  updateruike();
   animalsmove();
   drawanimals();
   checkanimals();
@@ -213,3 +218,19 @@ document.body.onkeydown = function(e){
 }
 
 init();
+
+var ruike = 0;
+
+function initruike(){
+  ruike = 0;
+  document.addEventListener('keydown',function(chou){     
+    if(chou.code == 'KeyP' && ruike == 0){
+        ruike = 400;
+    }
+  });
+}
+
+function updateruike(){
+  if (ruike>0)
+    ruike=ruike-1;
+}
