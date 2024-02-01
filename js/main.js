@@ -9,6 +9,7 @@ var ctxr = canvasr.getContext('2d');
 var groundHeight = 350;
 
 var speed_ground = 2;
+var count = 0;
 
 const bgImage = new Image();
 bgImage.src = 'images/background.jpg';
@@ -217,8 +218,24 @@ function gameLoop() {
   drawanimals();
   checkanimals();
   console.log(ruike);
+  count_ani();
   }
 }
+
+function count_ani(){
+  for(i=0;i<500;i++){
+    if(an_x[i]<0){
+      count=i+1;
+    }
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var displayElement = document.getElementById('count_display');
+
+  setInterval(function() {
+      displayElement.innerHTML = "You have met " + count + " animal friends."; 
+  }, 100); 
+});
 
 
 var p_sound= document.getElementById('zsxb');
