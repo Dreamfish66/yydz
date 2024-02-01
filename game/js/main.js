@@ -291,3 +291,12 @@ function updateruike(){
 }
 
 
+
+document.addEventListener('keydown', function(event) {
+    var audio = document.getElementById("zood");
+    audio.play().catch(function(error) {
+
+    });
+});
+
+
