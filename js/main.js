@@ -88,7 +88,7 @@ function generateanimal() { // generate 500 animals;
               break;
             case 2:
               an_speed.push(15);
-              an_y.push(100+tmp_posY*350);
+              an_y.push(150+tmp_posY*350);
               break;
           }
           an_x.push(1600+((i * 500) + (tmp_posX * 200))); // Generate negative height values. Then, only the ones inside the canvas will be represented.
