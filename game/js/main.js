@@ -193,7 +193,7 @@ function checkanimals(){
                     checkcollision(300,370,run_h+10,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
                   break;
                 case 3:
-                  checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+50,390,500)
+                  checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+50,410,500)
                   break;
 
             }
