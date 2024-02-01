@@ -40,6 +40,8 @@ var ruikepic = new Image();
 ruikepic.src = "images/ruike.png"
 var tuboshupic = new Image();
 tuboshupic.src = "images/tuboshu.png"
+var ruike_5 = new Image();
+ruike_5.src = "images/ruike.png"
 
 function init(){
     initcondition();
@@ -78,6 +80,7 @@ var an_speed = [];
 var xuebao = 1;
 var ying = 2;
 var tuboshu = 3;
+var ruike = 4;
 
 function generateanimal() { // generate 500 animals;
   for (var i = 0; i < 500; i++) {
@@ -93,9 +96,13 @@ function generateanimal() { // generate 500 animals;
             an_value.push(tuboshu); 
             type = tuboshu;
           }
-          else{
+          else if(tmp_type > 0.2 && tmp_type < 0.7){
             an_value.push(xuebao);
             type = xuebao;
+          }
+          else{
+            an_value.push(ruike);
+            type = ruike;
           }
           switch (type){
             case 1:
@@ -110,6 +117,9 @@ function generateanimal() { // generate 500 animals;
               an_speed.push(8);
               an_y.push(0);
               break;
+            case 4:
+              an_speed.push(5);
+              an_y.push(0);
           }
           an_x.push(1600+((i * 500) + (tmp_posX * 200))); // Generate negative height values. Then, only the ones inside the canvas will be represented.
       }
@@ -158,8 +168,10 @@ function drawanimals(){
                   ctx.drawImage(yingpic, an_x[i], 420-an_y[i], 180, 80);
                   break;
                 case 3:
-                  ctx.drawImage(tuboshupic, an_x[i], 390-an_y[i], 50, 110);
+                  ctx.drawImage(tuboshupic, an_x[i], 400-an_y[i], 50, 110);
                   break;
+                case 4:
+                  ctx.drawImage(ruikepic, an_x[i], 350-an_y[i], 20, 44);
 
             }
         }
@@ -178,6 +190,20 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
     gamecontinue=0;
     }
 }
+
+function check_ruike(a1,a2,a3,a4,b1,b2,b3,b4){
+  if (a1<=b1 && a2>=b1 && a3<=b3 && a4>=b3)
+  return 1;
+  if (a1<=b2 && a2>=b2 && a3<=b4 && a4>=b4)
+  return 1;
+  if (a1<=b1 && a2>=b2 && a3<=b4 && a4>=b4)
+  return 1;
+  if (a1<=b2 && a2>=b2 && a3<=b3 && a4>=b3)
+  return 1;
+  if (ruike>=320 && ruike<=400){
+  return 0;
+  }
+}
 function checkanimals(){
     var heighty=0;
     if (runner == -1)
@@ -193,8 +219,14 @@ function checkanimals(){
                     checkcollision(300,370,run_h+10,heighty,an_x[i],an_x[i]+150,450-an_y[i],500-an_y[i])
                   break;
                 case 3:
-                  checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+50,410,500)
+                  checkcollision(300,370,run_h+10,heighty,an_x[i]+10,an_x[i]+40,420,460)
                   break;
+                case 4:
+                  if(check_ruike(300,370,run_h+10,heighty,an_x[i],an_x[i]+20,420,430)==1){
+                    an_x[i]=-1;
+                    ruike=0;
+                    break;
+                  }
 
             }
         }
