@@ -14,7 +14,6 @@ var count = 0;
 const bgImage = new Image();
 bgImage.src = 'images/background.jpg';
 
-
 const bg = {
     x1: 0, 
     x2: 6400, 
@@ -42,6 +41,7 @@ ruikepic.src = "images/ruike.png"
 
 function init(){
     initcondition();
+    zood_sound.play();
     document.addEventListener('keydown',function(tecla){     
         if(tecla.code == 'Space' && runner <= 0){
             yi_sound.play();
@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 var p_sound= document.getElementById('zsxb');
 var yi_sound= document.getElementById('yi');
 var wu_sound= document.getElementById('wu');
+var zood_sound = document.getElementById('zood');
 window.onload = function() {
 document.body.onkeydown = function(e){
   if(e.key === 'p' || e.key === 'P'){
@@ -273,5 +274,4 @@ function updateruike(){
     ctxr.drawImage(ruikepic, 100, 40, 100, 250);
 }
 
-var audio = document.getElementById("bgm");
 
