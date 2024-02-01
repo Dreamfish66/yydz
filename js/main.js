@@ -3,6 +3,8 @@ var ctx = canvas.getContext('2d');
 var gamecontinue;
 canvas.width = 1600;
 canvas.height = 500;
+var canvasr = document.getElementById('object');
+var ctxr = canvasr.getContext('2d');
 
 var groundHeight = 350;
 
@@ -34,7 +36,8 @@ var yingpic = new Image();
 yingpic.src = "images/ying.png"
 var winwinpic = new Image();
 winwinpic.src="images/winwin.png"
-
+var ruikepic = new Image();
+ruikepic.src = "images/ruike.png"
 
 function init(){
     initcondition();
@@ -124,7 +127,7 @@ function run(){
   if (runner == 30)
     runner = 0;
   if (ruike>=320 && ruike<=400){
-    ctx.drawImage(winwinpic, 303, run_h, 80, 80);
+    ctx.drawImage(winwinpic, 305, run_h, 70, 70);
   }
 }
 function animalsmove(){
@@ -213,6 +216,7 @@ function gameLoop() {
   animalsmove();
   drawanimals();
   checkanimals();
+  console.log(ruike);
   }
 }
 
@@ -245,8 +249,11 @@ function initruike(){
 }
 
 function updateruike(){
+  ctxr.clearRect(0,0,300,300);
   if (ruike>0)
     ruike=ruike-1;
+  if (ruike == 0)
+    ctxr.drawImage(ruikepic, 100, 40, 100, 250);
 }
 
 var audio = document.getElementById("bgm");
