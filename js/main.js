@@ -37,7 +37,7 @@ yingpic.src = "images/ying.jpg"
 function init(){
     initcondition();
     document.addEventListener('keydown',function(tecla){     
-        if(tecla.code == 'Space' && runner == 0){
+        if(tecla.code == 'Space' && runner <= 0){
             runner = 1;
         }
     
