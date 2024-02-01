@@ -32,6 +32,8 @@ var xuebaopic = new Image();
 xuebaopic.src = "images/xuebao.jpg"
 var yingpic = new Image();
 yingpic.src = "images/ying.jpg"
+var winwinpic = new Image();
+winwinpic.src="images/winwin.png"
 
 
 function init(){
@@ -111,14 +113,17 @@ function run(){
   }
   else if (runner == -1){
     ctx.drawImage(dzyy_zip, 300, 425, 90, 75);
-    run_h=400;}
+    run_h=425;}
   else if (runner == 0){
     ctx.drawImage(dzyy_stand, 300, 350, 90, 150);
-    run_h=300;}
+    run_h=350;}
   if (runner>0)
     runner=runner+1;
   if (runner == 30)
     runner = 0;
+  if (ruike>=320 && ruike<=400){
+    ctx.drawImage(winwinpic, 303, run_h, 80, 80);
+  }
 }
 function animalsmove(){
     for (var i=0; i<500; i++){
