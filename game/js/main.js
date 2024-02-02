@@ -72,6 +72,7 @@ function init(){
           generateanimal();
           runner = 0;
           gamecontinue = 0;
+          count_ani = 0;
         }
     });
     document.addEventListener('keyup',function(event){     
