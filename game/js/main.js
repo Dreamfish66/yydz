@@ -307,6 +307,7 @@ function gameLoop() {
 function gameend(){
   var endword = document.getElementById('gameend_display')
   endword.innerHTML = "You Lose! Press E to retry"; 
+  count=0;
 }
 
 function count_ani(){
