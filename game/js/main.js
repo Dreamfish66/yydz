@@ -1,6 +1,6 @@
 var canvas = document.getElementById('background');
 var ctx = canvas.getContext('2d');
-var gamecontinue;
+var gamecontinue = -1;
 canvas.width = 1600;
 canvas.height = 500;
 var canvasr = document.getElementById('object');
@@ -44,12 +44,20 @@ var ruike_5 = new Image();
 ruike_5.src = "images/ruike.png"
 
 function init(){
+    var endword2 = document.getElementById('gameend_display')
+    endword2.innerHTML = "Press Space to start";
     initcondition();
     zood_sound.play();
     document.addEventListener('keydown',function(tecla){     
         if(tecla.code == 'Space' && runner <= 0){
             yi_sound.play();
             runner = 1;
+        }
+
+        if(tecla.code == 'Space' && gamecontinue == -1){
+          gamecontinue = 0;
+          var endword1 = document.getElementById('gameend_display')
+          endword1.innerHTML = "";
         }
     
         if(tecla.code == 'KeyS' && runner == 0){
@@ -80,7 +88,6 @@ function initcondition(){
     generateanimal();
     initruike();
     runner = 0;
-    gamecontinue = 0;
 }
 var an_x = [];
 var an_y = [];
@@ -270,6 +277,11 @@ var groundLine = {
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (gamecontinue == -1){
+    drawBackground();
+    run();
+    drawanimals();
+  }
   if (gamecontinue == 0){
   updateBackground();
   drawBackground();
