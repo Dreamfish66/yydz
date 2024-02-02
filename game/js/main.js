@@ -1,6 +1,6 @@
 var canvas = document.getElementById('background');
 var ctx = canvas.getContext('2d');
-var gamecontinue;
+var gamecontinue = -1;
 canvas.width = 1600;
 canvas.height = 500;
 var canvasr = document.getElementById('object');
@@ -44,6 +44,8 @@ var ruike_5 = new Image();
 ruike_5.src = "images/ruike.png"
 
 function init(){
+    var endword2 = document.getElementById('gameend_display')
+    endword2.innerHTML = "Press Space to start";
     initcondition();
     zood_sound.play();
     document.addEventListener('keydown',function(tecla){     
@@ -51,10 +53,25 @@ function init(){
             yi_sound.play();
             runner = 1;
         }
+
+        if(tecla.code == 'Space' && gamecontinue == -1){
+          gamecontinue = 0;
+          var endword1 = document.getElementById('gameend_display')
+          endword1.innerHTML = "";
+        }
     
         if(tecla.code == 'KeyS' && runner == 0){
           wu_sound.play();
             runner = -1;
+        }
+
+        if(tecla.code == "KeyE" && gamecontinue == 1){
+          var endword1 = document.getElementById('gameend_display')
+          endword1.innerHTML = "";
+          ruike = 0;
+          generateanimal();
+          runner = 0;
+          gamecontinue = 0;
         }
     });
     document.addEventListener('keyup',function(event){     
@@ -71,7 +88,6 @@ function initcondition(){
     generateanimal();
     initruike();
     runner = 0;
-    gamecontinue = 0;
 }
 var an_x = [];
 var an_y = [];
@@ -83,7 +99,11 @@ var tuboshu = 3;
 var ruike = 4;
 
 function generateanimal() { // generate 500 animals;
-  for (var i = 0; i < 500; i++) {
+  an_x=[];
+  an_y=[];
+  an_value=[];
+  an_speed=[];
+  for (var i = 0; i < 1500; i++) {
           var tmp_type = Math.random();
           var tmp_posX = Math.random();
           var tmp_posY = Math.random();
@@ -153,12 +173,12 @@ function run(){
   }
 }
 function animalsmove(){
-    for (var i=0; i<500; i++){
+    for (var i=0; i<1500; i++){
         an_x[i]=an_x[i]-an_speed[i];
     }
 }
 function drawanimals(){
-    for (var i=0; i<500; i++){
+    for (var i=0; i<1500; i++){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
@@ -192,6 +212,8 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
 }
 
 function check_ruike(a1,a2,a3,a4,b1,b2,b3,b4){
+  if (ruike>=320 && ruike<=400)
+  return 0;
   if (a1<=b1 && a2>=b1 && a3<=b3 && a4>=b3)
   return 1;
   if (a1<=b2 && a2>=b2 && a3<=b4 && a4>=b4)
@@ -200,16 +222,13 @@ function check_ruike(a1,a2,a3,a4,b1,b2,b3,b4){
   return 1;
   if (a1<=b2 && a2>=b2 && a3<=b3 && a4>=b3)
   return 1;
-  if (ruike>=320 && ruike<=400){
-  return 0;
-  }
 }
 function checkanimals(){
     var heighty=0;
     if (runner == -1)
         heighty=run_h+75;
     else heighty=run_h+150;
-    for (var i=0; i<500; i++){
+    for (var i=0; i<1500; i++){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
@@ -258,6 +277,11 @@ var groundLine = {
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (gamecontinue == -1){
+    drawBackground();
+    run();
+    drawanimals();
+  }
   if (gamecontinue == 0){
   updateBackground();
   drawBackground();
@@ -268,12 +292,23 @@ function gameLoop() {
   checkanimals();
   count_ani();
   }
+  if (gamecontinue == 1){
+    gameend();
+  }
+}
+
+function gameend(){
+  var endword = document.getElementById('gameend_display')
+  endword.innerHTML = "You Lose! Press E to retry"; 
 }
 
 function count_ani(){
-  for(i=0;i<500;i++){
+  for(i=0;i<1500;i++){
     if(an_x[i]<300){
       count=i+1;
+    }
+    if(an_x[i]<-100){
+      an_speed[i]=0;
     }
   }
 }
