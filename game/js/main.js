@@ -56,6 +56,15 @@ function init(){
           wu_sound.play();
             runner = -1;
         }
+
+        if(tecla.code == "KeyE" && gamecontinue == 1){
+          var endword1 = document.getElementById('gameend_display')
+          endword1.innerHTML = "";
+          ruike = 0;
+          generateanimal();
+          runner = 0;
+          gamecontinue = 0;
+        }
     });
     document.addEventListener('keyup',function(event){     
         if(event.code == 'KeyS' && runner == -1){
@@ -83,6 +92,10 @@ var tuboshu = 3;
 var ruike = 4;
 
 function generateanimal() { // generate 500 animals;
+  an_x=[];
+  an_y=[];
+  an_value=[];
+  an_speed=[];
   for (var i = 0; i < 1500; i++) {
           var tmp_type = Math.random();
           var tmp_posX = Math.random();
@@ -267,6 +280,14 @@ function gameLoop() {
   checkanimals();
   count_ani();
   }
+  if (gamecontinue == 1){
+    gameend();
+  }
+}
+
+function gameend(){
+  var endword = document.getElementById('gameend_display')
+  endword.innerHTML = "You Lose! Press E to retry"; 
 }
 
 function count_ani(){
