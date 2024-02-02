@@ -182,13 +182,13 @@ function drawanimals(){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
-                  ctx.drawImage(xuebaopic, an_x[i], 435-an_y[i], 150, 75);
+                  ctx.drawImage(xuebaopic, an_x[i], 435, 150, 75);
                   break;
                 case 2:
                   ctx.drawImage(yingpic, an_x[i], 420-an_y[i], 180, 80);
                   break;
                 case 3:
-                  ctx.drawImage(tuboshupic, an_x[i], 400-an_y[i], 50, 110);
+                  ctx.drawImage(tuboshupic, an_x[i], 400, 50, 110);
                   break;
                 case 4:
                   ctx.drawImage(ruikepic, an_x[i], 350-an_y[i], 20, 44);
