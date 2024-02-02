@@ -83,7 +83,7 @@ var tuboshu = 3;
 var ruike = 4;
 
 function generateanimal() { // generate 500 animals;
-  for (var i = 0; i < 500; i++) {
+  for (var i = 0; i < 1500; i++) {
           var tmp_type = Math.random();
           var tmp_posX = Math.random();
           var tmp_posY = Math.random();
@@ -153,12 +153,12 @@ function run(){
   }
 }
 function animalsmove(){
-    for (var i=0; i<500; i++){
+    for (var i=0; i<1500; i++){
         an_x[i]=an_x[i]-an_speed[i];
     }
 }
 function drawanimals(){
-    for (var i=0; i<500; i++){
+    for (var i=0; i<1500; i++){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
@@ -192,6 +192,8 @@ function checkcollision(a1,a2,a3,a4,b1,b2,b3,b4){
 }
 
 function check_ruike(a1,a2,a3,a4,b1,b2,b3,b4){
+  if (ruike>=320 && ruike<=400)
+  return 0;
   if (a1<=b1 && a2>=b1 && a3<=b3 && a4>=b3)
   return 1;
   if (a1<=b2 && a2>=b2 && a3<=b4 && a4>=b4)
@@ -200,16 +202,13 @@ function check_ruike(a1,a2,a3,a4,b1,b2,b3,b4){
   return 1;
   if (a1<=b2 && a2>=b2 && a3<=b3 && a4>=b3)
   return 1;
-  if (ruike>=320 && ruike<=400){
-  return 0;
-  }
 }
 function checkanimals(){
     var heighty=0;
     if (runner == -1)
         heighty=run_h+75;
     else heighty=run_h+150;
-    for (var i=0; i<500; i++){
+    for (var i=0; i<1500; i++){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
@@ -271,9 +270,12 @@ function gameLoop() {
 }
 
 function count_ani(){
-  for(i=0;i<500;i++){
+  for(i=0;i<1500;i++){
     if(an_x[i]<300){
       count=i+1;
+    }
+    if(an_x[i]<-100){
+      an_speed[i]=0;
     }
   }
 }
