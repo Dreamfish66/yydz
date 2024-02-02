@@ -96,20 +96,20 @@ var an_speed = [];
 var xuebao = 1;
 var ying = 2;
 var tuboshu = 3;
-var ruike = 4;
+var ruiken = 4;
 
 function generateanimal() { // generate 500 animals;
-  an_x=[];
-  an_y=[];
-  an_value=[];
-  an_speed=[];
+  an_x = [];
+  an_y = [];
+  an_value = [];
+  an_speed = [];
   for (var i = 0; i < 1500; i++) {
           var tmp_type = Math.random();
           var tmp_posX = Math.random();
           var tmp_posY = Math.random();
           var type = 0;
           if (tmp_type >= 0.8) {
-            an_value.push(ying); 
+            an_value.push(ying);
             type = ying;
           }// Depending on the value of tmp, we generate
           else if (tmp_type <= 0.2) {
@@ -120,9 +120,9 @@ function generateanimal() { // generate 500 animals;
             an_value.push(xuebao);
             type = xuebao;
           }
-          else{
-            an_value.push(ruike);
-            type = ruike;
+          else if (tmp_type >= 0.7 && tmp_type < 0.8){
+            an_value.push(ruiken);
+            type = ruiken;
           }
           switch (type){
             case 1:
@@ -140,9 +140,14 @@ function generateanimal() { // generate 500 animals;
             case 4:
               an_speed.push(5);
               an_y.push(0);
+              break;
           }
           an_x.push(1600+((i * 500) + (tmp_posX * 200))); // Generate negative height values. Then, only the ones inside the canvas will be represented.
       }
+    console.log(an_x.length);
+    console.log(an_y.length);
+    console.log(an_value.length);
+    console.log(an_speed.length);
 }
 
 function jump_path(x){
@@ -174,7 +179,9 @@ function run(){
 }
 function animalsmove(){
     for (var i=0; i<1500; i++){
+        if (an_x[i]<1600)
         an_x[i]=an_x[i]-an_speed[i];
+      else an_x[i]=an_x[i]-10;
     }
 }
 function drawanimals(){
@@ -182,13 +189,13 @@ function drawanimals(){
         if (an_x[i]>0 && an_x[i]<1650){
             switch (an_value[i]){
                 case 1:
-                  ctx.drawImage(xuebaopic, an_x[i], 435, 150, 75);
+                  ctx.drawImage(xuebaopic, an_x[i], 435-an_y[i], 150, 75);
                   break;
                 case 2:
                   ctx.drawImage(yingpic, an_x[i], 420-an_y[i], 180, 80);
                   break;
                 case 3:
-                  ctx.drawImage(tuboshupic, an_x[i], 400, 50, 110);
+                  ctx.drawImage(tuboshupic, an_x[i], 400-an_y[i], 50, 110);
                   break;
                 case 4:
                   ctx.drawImage(ruikepic, an_x[i], 350-an_y[i], 20, 44);
